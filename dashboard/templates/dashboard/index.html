@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1><a href="edit_bill/">Dashboard</a></h1>
+<hr>
+
+  <b>Category : </b>
+  {% if categories %}
+  <select>
+    {% for category in categories %}
+      <option value="{{ category.name }}">{{ category.name }}</option>
+    {% endfor %}
+  </select>
+  {% else %}
+    <strong style="color:red">There are no categories present.</strong>
+  {% endif %}
+
+  <form method="post" action="">
+    {% csrf_token %}
+    <table border="1">
+      {{ form }}
+    </table>
+    <button type="submit">Submit</button>
+  </form>
+
+{% endblock %}

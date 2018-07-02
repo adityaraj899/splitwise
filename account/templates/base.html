@@ -1,0 +1,96 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}splitwise{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="">
+
+  <!-- Bootstrap core CSS-->
+  {% block css %}
+  {% load static %}
+  <link href="{% static 'account/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'account/bootstrap/js/bootstrap.bundle.min.js' %}" rel="stylesheet">
+  <link href="{% static 'account/mdb/js/popper.min.js' %}" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'account/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'account/bootstrap/js/bootstarp.min.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'account/bootstrap/jquery/jquery.js' %}"></script>
+  <script src="{% static 'account/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'account/bootstrap/js/bootstrap.bundle.js' %}"></script>
+  {% endblock %}
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body >
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand text-warning" href="/">SplitWise</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/">Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/activity/">Activity</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/account/about/">About</a>
+        </li>
+        {% endif %}
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <!-- To give space between the buttons -->
+      &nbsp
+
+      <!-- login btn -->
+      <form class="form-inline my-2 my-lg-0">
+        {% if user.is_authenticated %}
+        <div class="dropdown btn btn-outline-success my-2 my-sm-0">
+          <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.username }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="btn btn-dark active" href="/account/profile/">Profile</a></li><br>
+            <!--  post link -->
+            <li><a class="btn btn-dark " href="/account/logout/">Logout</a></li>
+          </ul>
+        </div>
+        <!--<a class="btn btn-outline-success my-2 my-sm-0" href="/accounts/logout/">{{ user.username }}(Logout)</a>-->
+        {% else %}
+        <!--<a class="nav-link" href="/team/"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login/Signup</button></a>-->
+        <a class="btn btn-outline-danger my-2 my-sm-0" href="account/login/" role="button">Login/Signup</a>
+        {% endif %}
+      </form>
+    </div>
+  </nav>
+
+  <!-- Main container-->
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>

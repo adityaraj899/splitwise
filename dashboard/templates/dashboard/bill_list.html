@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Bill Record : </h1><hr>
+    {% if bills %}
+    {% for bill in bills %}
+        <div class="bill">
+            <h1><a href="{% url 'bill_detail' pk=bill.pk %}" title="View Bill">{{ bill.title }}</a></h1>
+            <div>
+                {{ bill.published_date | date:"d M Y"}} by {{post.author}}
+            </div>
+            <hr>
+        </div>
+    {% endfor %}
+    {% else %}
+      <strong style="color:red">There are no bill records present.</strong>
+    {% endif %}
+{% endblock %}
